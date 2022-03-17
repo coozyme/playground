@@ -44,7 +44,47 @@ func main() {
 		"soto":   25000,
 	}
 
+	// TODO: answer here
+
 	orderMenu := make(map[string]int64)
 
-	// TODO: answer here
+	for {
+		fmt.Println("Menu makanan")
+		for nama, harga := range foodMenu {
+			fmt.Println("-", nama, ", Price: ", harga)
+		}
+
+		fmt.Println(" ")
+		var NamaMenu, AddAgain string
+
+		fmt.Println("Form :")
+		fmt.Printf("- Masukkan nama menu yang mau dipesan :")
+		fmt.Scan(&NamaMenu)
+
+		if v, found := foodMenu[NamaMenu]; found {
+			fmt.Println("Menu telah ditambahkan ke Ordered Menu:")
+			fmt.Printf("Menu: %s, Price: %d \n", NamaMenu, v)
+			orderMenu[NamaMenu] = v
+
+		} else {
+			fmt.Println("Menu Pesanan Anda Tidak Tersedia`")
+		}
+
+		fmt.Println()
+		fmt.Printf("Ingin memesan menu lain? (yes/no): ")
+		fmt.Scan(&AddAgain)
+		if AddAgain == "no" {
+			var total int64 = 0
+			fmt.Println()
+			fmt.Printf("Menu yang anda pesan : \n")
+			for menu, price := range orderMenu {
+				fmt.Printf("%s = %d \n", menu, price)
+				total += price
+			}
+			fmt.Println("Total harga makanan yang harus anda bayar: ", total)
+			break
+		}
+
+	}
+
 }

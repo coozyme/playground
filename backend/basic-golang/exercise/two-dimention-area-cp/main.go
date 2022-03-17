@@ -36,4 +36,62 @@ import (
 
 func main() {
 	// TODO: answer here
+
+	var InputArea int
+	// fmt.Scan(InputArea)
+
+	fmt.Println("Input : \n" +
+		"1: Rectange Areas \n" +
+		"2: Rectangular Area \n" +
+		"3: Triangle Area \n" +
+		"4: Circle Area \n")
+
+	fmt.Print("Enter choice 1  2 | 3 | 4 : ")
+	fmt.Scan(&InputArea)
+
+	switch InputArea {
+	case 1:
+		var sisi, formula int64
+		fmt.Println("==== Rectange Area ====")
+		fmt.Print("Masukan sisi :")
+		fmt.Scan(&sisi)
+
+		formula = sisi * sisi
+
+		fmt.Printf("Luas Persegi adalah %d \n", formula)
+
+	case 2:
+		var panjang, lebar, formula int64
+		fmt.Println("==== Rectangular Area ====")
+		fmt.Print("Masukan Panjang : ")
+		fmt.Scan(&panjang)
+		fmt.Print("Masukan Lebar : ")
+		fmt.Scan(&lebar)
+
+		formula = panjang * lebar
+
+		fmt.Printf("Luas Persegi Panjang adalah %d \n", formula)
+	case 3:
+		var panjang, tinggi, formula int64
+		fmt.Println("==== Triangle Area ====")
+		fmt.Print("Masukkan panjang alas segitiga : ")
+		fmt.Scan(&panjang)
+		fmt.Print("Masukkan tinggi segitiga : ")
+		fmt.Scan(&tinggi)
+
+		formula = panjang * tinggi / 2
+
+		fmt.Printf("Luas Segitiga adalah %d \n", formula)
+	case 4:
+		var jari, formula float64
+		const pi = 3.14
+		fmt.Println("==== Circle Area ====")
+		fmt.Print("Masukkan jari - jari : ")
+		fmt.Scan(&jari)
+
+		formula = pi * (math.Pow(jari, 2))
+
+		fmt.Printf("Luas Persegi Panjang adalah %f \n", formula)
+	}
+
 }
