@@ -8,5 +8,9 @@ func main() {
 	//maka fungsi akan mengembalikan 9
 
 	// TODO: answer here
+	square := func(name string) string {
+		return "hello" + name
+	}("doni")
+
 	fmt.Println(square)
 }

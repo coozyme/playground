@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 //fungsi square sama seperti sebelumnya
 //yang membedakan adalah fungsi ini
@@ -12,3 +15,9 @@ func main() {
 }
 
 // TODO: answer here
+func square(num1, num2 int) (count1, count2 int) {
+	count1 = int(math.Pow(float64(num1), 2))
+	count2 = int(math.Pow(float64(num2), 2))
+
+	return
+}

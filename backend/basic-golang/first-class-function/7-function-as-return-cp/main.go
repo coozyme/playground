@@ -12,3 +12,9 @@ func main() {
 	res := areaF(3, 4) // 12
 	fmt.Println(res)
 }
+
+func getAreaFunc() func(int, int) int {
+	return func(x, y int) int {
+		return x * y
+	}
+}

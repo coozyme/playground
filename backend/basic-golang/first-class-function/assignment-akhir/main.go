@@ -7,8 +7,17 @@ import "fmt"
 // fungsi ini digunakan untuk menambahkan point
 // fungsi ini merupakan closure
 func points(base int) func(x int) int {
-		// TODO: answer here
+	// TODO: answer here
+	// basePoint := 0
+	basePoint := base
+	fmt.Println("a", basePoint)
+	return func(x int) int {
+		fmt.Println("ss", basePoint+x)
+		basePoint = basePoint + x
+		return basePoint
+
 	}
+
 }
 
 func main() {
