@@ -11,4 +11,11 @@ import "fmt"
 // Outputkan jawabannya ya pastikan cap dan len nya adalah 2
 func main() {
 	// TODO: answer here
+	var nameSlice = []string{}
+
+	// nameSlice[0] = "Ary"
+	// nameSlice[1] = "Setya"
+	nam3 := append(nameSlice, "ao")
+	fmt.Println(nameSlice)
+	fmt.Println(nam3)
 }

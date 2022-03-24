@@ -3,7 +3,7 @@
 my name is Ary Setya Pambudi, you can call me Ary 👋 <br>
 I live in Tangerang, Banten
 
-### My hobbies are
+### My hobbies
 
 - 💻 Ngoding
 - 🎶 Listen to podcasts, music, youtube

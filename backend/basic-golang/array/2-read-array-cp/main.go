@@ -7,4 +7,9 @@ import "fmt"
 // Outputkan hasilnya ya
 func main() {
 	// TODO: answer here
+
+	name := [2]string{"ary", "setya"}
+
+	fmt.Println(name[0])
+	fmt.Println(name[1])
 }

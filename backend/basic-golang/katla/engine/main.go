@@ -17,8 +17,10 @@ const maxGuess = 6
 //don't worry about the content of this method for now. We haven't learn some concepts
 func getDictionaryWords() []string {
 	kbbiURL := "https://gist.githubusercontent.com/fikriauliya/c7024f9629ba7d515f01a625c66a4f2f/raw/141f629d452145ce7e02215a98cde04d9f1bbb20/kbbi.txt"
+	// kbbiURL := "https://kbbi.vercel.app"
 
 	data, err := http.Get(kbbiURL)
+	fmt.Println("sa", data)
 	if err != nil {
 		panic(err)
 	}

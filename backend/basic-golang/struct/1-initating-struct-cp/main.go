@@ -6,6 +6,11 @@ import "fmt"
 
 // TODO: answer here
 
+type Rectangle struct {
+	Width  int
+	Length int
+}
+
 func main() {
 	var r Rectangle
 	r.Width = 10

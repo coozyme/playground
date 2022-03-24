@@ -8,4 +8,6 @@ import "fmt"
 // Lalu outputkan array nya.
 func main() {
 	// TODO: answer here
+	var arr = [3]int{1, 2, 4}
+	fmt.Println(arr)
 }
