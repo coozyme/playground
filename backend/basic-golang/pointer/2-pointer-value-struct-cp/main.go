@@ -9,6 +9,21 @@ import "fmt"
 // SetWidthValue(width int) untuk mengubah width dengan value
 
 // TODO: answer here
+type Rectangle struct {
+	Width  int
+	Length int
+}
+
+func (r *Rectangle) SetWidthPointer(p int) {
+	r.Width = p
+	fmt.Println("in method SetWidthPointer", r.Width)
+}
+
+func (r Rectangle) SetWidthValue(p int) {
+	r.Width = p
+	fmt.Println("in method SetWidthValue", r.Width)
+}
+
 func main() {
 	var r Rectangle
 	r.Width = 10
