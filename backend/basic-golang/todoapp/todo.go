@@ -12,15 +12,27 @@ type Todos struct {
 }
 
 func (todos *Todos) Add(item Item) {
-	// TODO: answer here
+	//beginanswer
+	todos.items = append(todos.items, item)
+	//endanswer
 }
 
 func (todos *Todos) GetAll() []Item {
-	return []Item{} // TODO: replace this
+	//beginanswer
+	return todos.items
+	//endanswer return []Item{}
 }
 
 func (todos *Todos) GetUpcoming() []Item {
-	return []Item{} // TODO: replace this
+	//beginanswer
+	var upcoming []Item
+	for _, item := range todos.items {
+		if item.Deadline.After(time.Now()) {
+			upcoming = append(upcoming, item)
+		}
+	}
+	return upcoming
+	//endanswer return []Item{}
 }
 
 func NewItem(title string, deadline time.Time) Item {
