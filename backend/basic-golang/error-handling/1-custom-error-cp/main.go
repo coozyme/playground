@@ -9,7 +9,14 @@ import (
 // Misalnya adalah error untuk validasi data umur kurang dari 0.
 
 // TODO: answer here
+type ErrorDataNotFound struct {
+	message string
+	errCode int32
+}
 
+func (e *ErrorDataNotFound) Error() string {
+	return fmt.Sprintf("%d %s", e.errCode, e.message)
+}
 func GetAge(data map[string]int, name string) (int, error) {
 	if _, ok := data[name]; !ok {
 		return 0, errors.New("Data not found")
@@ -18,6 +25,10 @@ func GetAge(data map[string]int, name string) (int, error) {
 	if data[name] < 0 {
 		// Isilah baris ini dengan return 0 dan custom error yang telah dibuat dengan message error invalid data dan errCode 500
 		// TODO: answer here
+		return 0, &ErrorDataNotFound{
+			message: fmt.Sprintf("error invalid data"),
+			errCode: 500,
+		}
 	}
 
 	return data[name], nil
@@ -33,5 +44,10 @@ func main() {
 	_, err := GetAge(peopleAge, "Tony")
 	if err != nil {
 		fmt.Println(err.Error())
+	}
+
+	_, err2 := GetAge(peopleAge, "Roger")
+	if err != nil {
+		fmt.Println(err2.Error())
 	}
 }
