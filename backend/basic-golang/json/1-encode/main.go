@@ -29,5 +29,6 @@ func main() {
 		Hobby:     "belajar",
 	})
 	jsonString := string(jsonData)
+	fmt.Println(jsonData)
 	fmt.Println(jsonString)
 }

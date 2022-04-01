@@ -43,6 +43,7 @@ func main() {
 	// err adalah variable untuk menampung jika ada masalah
 	// ketika proses encode
 
+	// fmt.Println(mejaMejaJSON)
 	fmt.Println(string(mejaMejaJSON))
 }
 
