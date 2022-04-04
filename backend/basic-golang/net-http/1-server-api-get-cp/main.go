@@ -29,6 +29,11 @@ func TableHandler(w http.ResponseWriter, r *http.Request) {
 		total := r.FormValue("total")
 		convTotal, _ := strconv.Atoi(total) //convert from string -> int
 
+		if total == "" {
+			http.Error(w, "invalid total", http.StatusBadRequest)
+			return
+		}
+
 		for _, t := range data {
 			if t.Total == convTotal {
 				fieldData = append(fieldData, t)
@@ -36,11 +41,6 @@ func TableHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		result, _ := json.Marshal(fieldData)
-
-		if convTotal == 0 {
-			http.Error(w, "invalid total", http.StatusBadRequest)
-			return
-		}
 
 		if len(fieldData) == 0 {
 			http.Error(w, `{"status":"table not found"}`, http.StatusNotFound)
