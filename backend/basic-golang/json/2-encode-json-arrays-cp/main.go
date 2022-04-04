@@ -34,20 +34,23 @@ func NewMeja(m Items) Items {
 }
 
 func main() {
-	item := []Meja{{
-		Jenis:     "Meja Lipat",
-		Warna:     "Coklat",
-		Jumlah:    40,
-		Deskripsi: "meja untuk belajar",
-	},
+	items := Items{[]Meja{
+		{
+			Jenis:     "Meja Lipat",
+			Warna:     "Coklat",
+			Jumlah:    40,
+			Deskripsi: "meja untuk belajar",
+		},
 		{
 			Jenis:     "Meja Hijau",
 			Warna:     "Hijau",
 			Jumlah:    10,
 			Deskripsi: "meja untuk pengadilan",
 		},
-	}
+	}}
 
-	fmt.Println(item)
+	meja := NewMeja(items)
+	result := meja.EncodeJSON()
 
+	fmt.Println(result)
 }
