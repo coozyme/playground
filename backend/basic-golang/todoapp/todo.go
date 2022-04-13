@@ -1,6 +1,9 @@
 package main
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 type Item struct {
 	Title    string
@@ -41,4 +44,14 @@ func NewItem(title string, deadline time.Time) Item {
 
 func NewTodos() Todos {
 	return Todos{}
+}
+
+func main() {
+	myTodo := NewTodos()
+	myTodo.Add(NewItem("buy milk", time.Now().Add(time.Hour)))
+	myTodo.Add(NewItem("buy bag", time.Now().Add(time.Hour)))
+
+	getAll := myTodo.GetAll()
+
+	fmt.Println(getAll)
 }

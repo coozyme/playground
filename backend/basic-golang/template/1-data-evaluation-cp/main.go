@@ -24,7 +24,6 @@ func ExecuteToByteBuffer(account Account) ([]byte, error) {
 	var textTemplate string
 	// TODO: answer here
 
-	acc := account
 	textTemplate = "Akun {{.Name}} dengan Nomor {{.Number}} memiliki saldo sebesar ${{.Balance}}."
 	tmpl, err := template.New("ExecuteToByteBuffer").Parse(textTemplate)
 
@@ -33,7 +32,7 @@ func ExecuteToByteBuffer(account Account) ([]byte, error) {
 	}
 
 	var b bytes.Buffer
-	err = tmpl.Execute(&b, acc)
+	err = tmpl.Execute(&b, account)
 
 	if err != nil {
 		panic(err)
