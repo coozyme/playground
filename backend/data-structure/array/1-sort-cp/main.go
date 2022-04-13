@@ -14,7 +14,10 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
 	var nums = []int{4, 5, 2, 1, 3}
@@ -25,9 +28,13 @@ func main() {
 }
 
 func Sort(arr []int) []int {
-	return []int{} // TODO: replace this
+	sort.Ints(arr)
+	return arr // TODO: replace this
 }
 
 func RotateLeft(d int, arr []int) []int {
-	return []int{} // TODO: replace this
+	rotate := arr[:d]
+	rotate2 := arr[d:]
+	rotateTotal := append(rotate2, rotate...)
+	return rotateTotal // TODO: replace this
 }

@@ -46,5 +46,27 @@ func main() {
 }
 
 func CountStudents(students []int, sandwiches []int) int {
-	0 // TODO: replace this
+
+	for _, sandwich := range sandwiches {
+		isFound := false
+		for idx, student := range students {
+			if sandwich == student {
+				isFound = true
+				if idx == len(students)-1 {
+					students = students[:idx]
+				} else {
+					students = append(students[:idx], students[idx+1:]...)
+				}
+				sandwiches = sandwiches[1:]
+				break
+			}
+		}
+
+		if !isFound {
+			return len(students)
+		}
+	}
+
+	return len(students)
+	// 0 // TODO: replace this
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 )
 
@@ -22,12 +23,19 @@ func (s *Set) Add(elem string) {
 
 // Delete - menghapus elemen dari set
 func (s *Set) Delete(elem string) (bool, error) {
-	return fmt.Errorf("replace this with your code") // TODO: replace this
+	if s.Contains(elem) {
+		delete(s.Elements, elem)
+		return true, nil
+	}
+	return false, errors.New("delete failed!, element Aditira is not in the set") // TODO: replace this
 }
 
 // Contains - memeriksa apakah elemen ada dalam set
 func (s *Set) Contains(elem string) bool {
-	return false // TODO: replace this
+	if _, ok := s.Elements[elem]; ok {
+		return true
+	}
+	return false
 }
 
 // List - menampilkan elemen dari set

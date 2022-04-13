@@ -13,7 +13,9 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	var str1 = []string{"Java", "Python", "Javascript", "C ++", "C#"}
@@ -22,9 +24,29 @@ func main() {
 }
 
 func Intersection(str1, str2 []string) (inter []string) {
-	return []string{} // TODO: replace this
+
+	hash := map[string]struct{}{}
+	for _, val := range str1 {
+		hash[val] = struct{}{}
+	}
+
+	for _, item := range str2 {
+		if _, exist := hash[item]; exist {
+			inter = append(inter, item)
+		}
+	}
+
+	return inter // TODO: replace this
 }
 
 func RemoveDuplicates(elements []string) (nodups []string) {
-	return []string{} // TODO: replace this
+	element := map[string]struct{}{}
+	for _, val := range elements {
+		element[val] = struct{}{}
+	}
+
+	for key := range element {
+		nodups = append(nodups, key)
+	}
+	return nodups // TODO: replace this
 }
