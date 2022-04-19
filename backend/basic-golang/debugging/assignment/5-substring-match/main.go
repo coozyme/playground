@@ -40,9 +40,8 @@ func IsExistInSource(source, search string) bool {
 
 func IsExistInSourceCorrect(source, search string) bool {
 	// TODO: replace this
-
 	if len(source) < len(search) {
-		return true
+		return false
 	}
 
 	for startSource := 0; startSource < len(source)-len(search)+1; startSource++ {
@@ -50,7 +49,7 @@ func IsExistInSourceCorrect(source, search string) bool {
 		idxSource := startSource
 
 		for idxSearch := 0; idxSearch < len(search); idxSearch++ {
-			if source[idxSource] != source[idxSearch] {
+			if source[idxSource] != search[idxSearch] {
 				found = false
 				break
 			}
@@ -60,6 +59,5 @@ func IsExistInSourceCorrect(source, search string) bool {
 			return true
 		}
 	}
-
 	return false
 }
