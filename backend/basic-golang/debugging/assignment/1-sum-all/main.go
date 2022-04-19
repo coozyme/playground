@@ -11,6 +11,7 @@ func main() {
 	// Try correct answer:
 	// resCorrect := SumAllCorrect(arr)
 	// fmt.Println(resCorrect)
+	SumAllCorrect([]int{12, 5, 10, 1, 3})
 }
 
 func SumAll(arr []int) int {
@@ -22,5 +23,13 @@ func SumAll(arr []int) int {
 }
 
 func SumAllCorrect(arr []int) int {
-	return 0 // TODO: replace this
+	// TODO: replace this
+	res := 0
+
+	for _, val := range arr {
+		fmt.Println("es", val)
+		res += val
+	}
+
+	return res
 }
