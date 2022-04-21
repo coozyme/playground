@@ -39,6 +39,8 @@ func doubleCalculatorWorker(queue chan request, maxThroughput int, maxObservedTh
 			mu.Unlock()
 
 			// TODO: answer here
+			// queue <- request{req, maxObservedThroughtputC}
+			maxObservedThroughtputC <- maxObservedThroughtput
 		}(req)
 	}
 	maxObservedThroughtputC <- maxObservedThroughtput

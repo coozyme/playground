@@ -17,7 +17,7 @@ func getChar(str string) {
 	for _, char := range str {
 		fmt.Printf("%c ", char) //view withouth time
 
-		// fmt.Printf("%c %v\n", char, time.Since(start)) //view with time
+		fmt.Printf("%c %v\n", char, time.Since(start)) //view with time
 	}
 	fmt.Println()
 }
@@ -26,7 +26,7 @@ func getDigits(digits []int) {
 	for _, digit := range digits {
 		fmt.Printf("%v ", digit) //run withouth time
 
-		// fmt.Printf("%d %v\n", digit, time.Since(start)) //view with time
+		fmt.Printf("%d %v\n", digit, time.Since(start)) //view with time
 	}
 	fmt.Println()
 }
