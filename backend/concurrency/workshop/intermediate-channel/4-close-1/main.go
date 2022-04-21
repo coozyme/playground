@@ -20,6 +20,7 @@ func sender(output chan string) {
 		time.Sleep(500 * time.Millisecond)
 	}
 	close(output)
+	//close(output) // memblocking serta mencegah jika input sudah tidak ada data yang di loop kembali
 }
 
 //jika menggunakan for ... range channel
