@@ -13,9 +13,12 @@ func AsyncHttpGets(urls []string) []*http.Response {
 	ch := make(chan *http.Response)
 	responses := []*http.Response{}
 	// TODO: answer here
+	client := http.Client{}
 	for _, url := range urls {
 		go func(url string) {
 			// TODO: answer here
+			resp, _ := client.Get(url)
+			ch <- resp
 		}(url)
 	}
 
