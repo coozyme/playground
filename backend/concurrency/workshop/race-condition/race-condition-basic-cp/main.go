@@ -14,6 +14,7 @@ func counter(output chan<- int) {
 		go func() {
 			//kirim 1 ke channel
 			// TODO: answer here
+			wg
 		}()
 	}
 	//mengubah nilai count menggunakan data dari channel
