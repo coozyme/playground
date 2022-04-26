@@ -22,17 +22,21 @@ func createRequest(workerInput chan<- int, workerOutput <-chan int, wg *sync.Wai
 		mu.Lock()
 		go func(i int) {
 			// TODO: answer here
-			defer mu.Unlock()
+			workerInput <- i
 
 			var res int
 
 			// TODO: answer here
+			res = <-workerOutput
 
 			//tambahkan res ke result. Selain itu gunakan juga sesuatu yang menghindari data race
 			// TODO: answer here
+
 			result += res
 
 			fmt.Println(res)
+
+			mu.Unlock()
 		}(i)
 	}
 	wg.Done()
