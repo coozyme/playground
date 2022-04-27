@@ -46,53 +46,57 @@ func (api *API) login(w http.ResponseWriter, req *http.Request) {
 	//       3. expiry time menggunakan time millisecond
 
 	// TODO: answer here
-
+	expirationTime := time.Now().Add(time.Minute * 5)
+	claims := Claims{
+		Username: *res,
+		StandardClaims: jwt.StandardClaims{
+			// expiry time menggunakan time millisecond
+			ExpiresAt: expirationTime.Unix(),
+		},
+	}
 	// Task: Buat token menggunakan encoded claim dengan salah satu algoritma yang dipakai
 
 	// TODO: answer here
-
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	// Task: 1. Buat jwt string dari token yang sudah dibuat menggunakan JWT key yang telah dideklarasikan
 	//       2. return internal error ketika ada kesalahan ketika pembuatan JWT string
 
 	// TODO: answer here
-
+	tokenString, err := token.SignedString(jwtKey)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		encoder.Encode(AuthErrorResponse{Error: err.Error()})
+		return
+	}
 	// Task: Set token string kedalam cookie response
 
 	// TODO: answer here
-
+	http.SetCookie(w, &http.Cookie{
+		Name:    "token",
+		Value:   tokenString,
+		Expires: expirationTime,
+	})
 	// Task: Return response berupa username dan token JWT yang sudah login
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: username}) // TODO: replace this
-=======
-	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: ""}) // TODO: replace this
->>>>>>> a4636229be3b4b37edbce94179d899e01a770c2c
-=======
-	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: "", Token: ""}) // TODO: replace this
->>>>>>> 264ddc6dc02457d5a01ce89929fbd0225aab642b
+	//encoder.Encode(LoginSuccessResponse{Username: *res})
+	json.NewEncoder(w).Encode(LoginSuccessResponse{
+		Username: *res,
+		Token:    tokenString,
+	}) // TODO: replace this
+
 }
 
 func (api *API) logout(w http.ResponseWriter, req *http.Request) {
 	api.AllowOrigin(w, req)
 	username := req.URL.Query().Get("username")
 	err := api.usersRepo.Logout(username)
-<<<<<<< HEAD
-	encoder := json.NewEncoder(w)
-	if err != nil {
-		w.WriteHeader(http.StatusUnauthorized)
-		encoder.Encode(AuthErrorResponse{Error: err.Error()})
-		return
-	}
-	w.WriteHeader(http.StatusOK)
-=======
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		encoder := json.NewEncoder(w)
 		encoder.Encode(AuthErrorResponse{Error: err.Error()})
 		return
 	}
->>>>>>> a4636229be3b4b37edbce94179d899e01a770c2c
 
-	encoder.Encode(AuthErrorResponse{Error: ""}) // TODO: replace this
+	w.WriteHeader(http.StatusOK)
+	///encoder.Encode(AuthErrorResponse{Error: ""}) // TODO: replace this
 }

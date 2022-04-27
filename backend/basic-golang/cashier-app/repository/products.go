@@ -1,8 +1,6 @@
 package repository
 
 import (
-	// "strconv"
-
 	"strconv"
 
 	"github.com/ruang-guru/playground/backend/basic-golang/cashier-app/db"
@@ -17,22 +15,33 @@ func NewProductRepository(db db.DB) ProductRepository {
 }
 
 func (u *ProductRepository) LoadOrCreate() ([]Product, error) {
-	return []Product{}, nil // TODO: replace this
+	record, err := u.db.Load("products")
+	if err != nil {
+		return nil, err
+	}
+	result := make([]Product, 0)
+	for i := 1; i < len(record); i++ {
+		Price, err := strconv.Atoi(record[i][2])
+		if err != nil {
+			return nil, err
+		}
+
+		product := Product{
+			Category:    record[i][0],
+			ProductName: record[i][1],
+			Price:       Price,
+		}
+		result = append(result, product)
+	}
+	return result, err
+	//return []Product{}, nil // TODO: replace this
 }
 
 func (u *ProductRepository) SelectAll() ([]Product, error) {
-	data, _ := u.db.Load("products")
-	var products []Product
-
-	for index, val := range data {
-		if index != 0 {
-			convertToInt, _ := strconv.Atoi(val[2])
-			products = append(products, Product{
-				Category:    val[0],
-				ProductName: val[1],
-				Price:       convertToInt,
-			})
-		}
+	product, err := u.LoadOrCreate()
+	if err != nil {
+		return nil, err
 	}
-	return products, nil // TODO: replace this
+	return product, nil
+	//	return []Product{}, nil // TODO: replace this
 }

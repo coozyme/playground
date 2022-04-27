@@ -65,79 +65,102 @@ func (u *CartItemRepository) Save(cartItems []CartItem) error {
 }
 
 func (u *CartItemRepository) SelectAll() ([]CartItem, error) {
-	dataCSV, _ := u.db.Load("cart_items")
-	var carItems []CartItem
-	for index, val := range dataCSV {
-		if index != 0 {
-			covertIntPrice, _ := strconv.Atoi(val[2])
-			covertIntQuantity, _ := strconv.Atoi(val[3])
-			carItems = append(carItems, CartItem{
-				Category:    val[0],
-				ProductName: val[1],
-				Price:       covertIntPrice,
-				Quantity:    covertIntQuantity,
-			})
-		}
+	cartItems, err := u.LoadOrCreate()
+	if err != nil {
+		return nil, err
 	}
-
-	return carItems, nil // TODO: replace this
+	return cartItems, nil
 }
 
 func (u *CartItemRepository) Add(product Product) error {
-	dataCSV, err := u.db.Load("cart_items")
+	cartItems, err := u.SelectAll()
 	if err != nil {
-		records := [][]string{
-			{"category", "product_name", "price", "quantity"},
-		}
-		if err := u.db.Save("cart_items", records); err != nil {
-			return err
-		}
-		return nil
+		return err
 	}
-
-	isFound := false
-	for index, val := range dataCSV {
-		if index != 0 {
-
-			if val[1] == product.ProductName {
-				parseInt, _ := strconv.Atoi(val[3])
-				dataCSV[index][3] = strconv.Itoa(parseInt + 1)
-				isFound = true
-				break
-			}
+	for i := 0; i < len(cartItems); i++ {
+		if cartItems[i].ProductName == product.ProductName {
+			cartItems[i].Quantity++
+			return u.Save(cartItems)
 		}
 	}
+	cartItems = append(cartItems, CartItem{
+		Category:    product.Category,
+		ProductName: product.ProductName,
+		Price:       product.Price,
+		Quantity:    1,
+	})
+	return u.Save(cartItems)
 
-	if isFound == false {
-		parseString := strconv.Itoa(product.Price)
-		dataCSV = append(dataCSV, []string{
-			product.Category, product.ProductName, parseString, "1",
-		})
-	}
+	// carts, err := u.LoadOrCreate()
+	// if err != nil {
+	// 	return err
+	// }
 
-	u.db.Save("cart_items", dataCSV)
+	// flag := false
 
-	return nil // TODO: replace this
+	// for i := 0; i < len(carts); i++ {
+	// 	if carts[i].ProductName == product.ProductName {
+	// 		flag = true
+	// 		carts[i].Quantity++
+	// 		return u.Save(carts)
+	// 	}
+	// }
+
+	// if flag == false {
+	// 	carts = append(carts, CartItem{
+	// 		Category:    product.Category,
+	// 		ProductName: product.ProductName,
+	// 		Price:       product.Price,
+	// 		Quantity:    1,
+	// 	})
+	// }
+
+	//return u.Save(carts)
+
+	// record := [][]string{
+	// 	{"category", "product_name", "price", "quantity"},
+	// }
+	// for i := 0; i < len(record); i++ {
+	// 	record = append(record, []string{
+	// 		product.Category,
+	// 		product.ProductName,
+	// 		strconv.Itoa(product.Price),
+	// 		"1",
+	// 	})
+	// }
+	//return u.Save(carts)
+	// TODO: replace this
 }
 
 func (u *CartItemRepository) ResetCartItems() error {
 	u.db.Delete("cart_items")
-	cartItem := [][]string{{"category", "product_name", "price", "quantity"}}
+	resetData := [][]string{
+		{"category", "product_name", "price", "quantity"},
+	}
+	return u.db.Save("cart_items", resetData)
+	//return nil // TODO: replace this
 
-	u.db.Save("cart_items", cartItem)
-	return nil // TODO: replace this
 }
 
 func (u *CartItemRepository) TotalPrice() (int, error) {
-	dataCSV, _ := u.db.Load("cart_items")
-	total := 0
-	for index, val := range dataCSV {
-		if index != 0 {
-			covertIntPrice, _ := strconv.Atoi(val[2])
-			covertIntQuantity, _ := strconv.Atoi(val[3])
+	//return 0, nil // TODO: replace this
+	// 	cartItems, err := u.SelectAll()
+	// 	if err != nil {
+	// 		return 0, err
+	// 	}
+	// 	totalPrice := 0
 
-			total += covertIntPrice * covertIntQuantity
-		}
+	// 	for _, cartItem := range cartItems {
+	// 		totalPrice += (cartItem.Quantity * cartItem.Price)
+	// 	}
+	// 	return totalPrice, err
+	CartItems, err := u.LoadOrCreate()
+	if err != nil {
+		return 0, err
 	}
-	return total, nil // TODO: replace this
+	totalPrice := 0
+	for i := 0; i < len(CartItems); i++ {
+		totalPrice += CartItems[i].Price * CartItems[i].Quantity
+	}
+	return totalPrice, err
 }
