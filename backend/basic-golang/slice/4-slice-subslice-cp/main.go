@@ -14,4 +14,12 @@ func main() {
 		"Aurelius", "is", "also", "known", "to", "be", "a", "philosopher"}
 
 	// TODO: answer here
+	var sliceCopy []string
+	sliceCopy = append(sliceCopy, slice...)
+
+	slice1 := sliceCopy[0:5]
+	slice2 := sliceCopy[18:20]
+
+	fmt.Println(append(slice1, slice2...))
+	fmt.Println(append(sliceCopy[0:5], sliceCopy[18:20]...))
 }

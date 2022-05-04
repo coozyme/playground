@@ -13,6 +13,16 @@ type Employee struct {
 
 // TODO: answer here
 
+func (e *Employee) GetFullSalary() int {
+	fullSalary := e.BaseSalary + e.Bonus
+	return fullSalary
+}
+
+func (e *Employee) AddBonus(bonus int) int {
+	addBonus := e.Bonus + bonus
+	return addBonus
+}
+
 func main() {
 	employee1 := Employee{Name: "bob", BaseSalary: 4000000, Bonus: 300000}
 	fmt.Println("sebelum bonus dinaikkan")

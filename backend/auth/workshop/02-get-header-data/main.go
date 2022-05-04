@@ -30,7 +30,7 @@ func Routes() *http.ServeMux {
 		}
 
 		if cookie.Value == "" {
-			w.WriteHeader(http.StatusUnauthorized)
+			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
 		w.Write([]byte(fmt.Sprintf("Tokenmu adalah %s!", cookie.Value)))

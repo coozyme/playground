@@ -11,8 +11,8 @@ import (
 // Ada banyak cara untuk membaca text file line by line.
 
 func main() {
-	// ReadWithReadLine()
-	ReadWithScanner()
+	ReadWithReadLine()
+	// ReadWithScanner()
 }
 
 // Dengan bufio.Reader.ReadLine

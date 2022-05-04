@@ -19,6 +19,22 @@ type Table struct {
 
 func viewTable(w http.ResponseWriter, r *http.Request) {
 	// TODO: answer here
+	filePathIndex := path.Join("views", "index.html")
+	tmpl, err := template.ParseFiles(filePathIndex)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	data := map[string]interface{}{
+		"title":  "RG",
+		"tables": data,
+	}
+
+	if err := tmpl.Execute(w, data); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 var data = []Table{

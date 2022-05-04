@@ -11,12 +11,14 @@
               <th>Warna</th>
               <th>Jumlah Meja</th>
             </tr>
+            {{range .tables}}
             <tr>
-                <td>{{.table.ID}}</td>
-                <td>{{.table.Type}}</td>
-                <td>{{.table.Color}}</td>
-                <td>{{.table.Total}}</td>
+                <td>{{.ID}}</td>
+                <td>{{.Type}}</td>
+                <td>{{.Color}}</td>
+                <td>{{.Total}}</td>
             </tr>
+            {{end}}
         </table>
     </body>
 </html>

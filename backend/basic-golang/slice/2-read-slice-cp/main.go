@@ -7,4 +7,6 @@ import "fmt"
 func main() {
 	slice := []string{"Hello", "World"}
 	// TODO: answer here
+	fmt.Println(slice[0])
+	fmt.Println(slice[1])
 }

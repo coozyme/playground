@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 )
 
 func main() {
@@ -17,5 +18,15 @@ type FileData struct {
 }
 
 func ReadFile(name string) (FileData, error) {
-	return FileData{}, nil // TODO: replace this
+	data, err := ioutil.ReadFile(name)
+	if err != nil {
+		log.Fatalf("failed read file, err: %s", err)
+	}
+
+	files := FileData{
+		Name: name,
+		Size: len(data),
+		Data: data,
+	}
+	return files, nil // TODO: replace this
 }
