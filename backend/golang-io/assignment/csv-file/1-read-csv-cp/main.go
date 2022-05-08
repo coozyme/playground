@@ -5,16 +5,21 @@ import (
 	"fmt"
 	"log"
 	"os"
-
-	"golang.org/x/tools/go/analysis/passes/nilfunc"
+	"strings"
 )
 
 func main() {
 	fmt.Print("dummy commit")
+
+	data := make(map[string]string)
+	testData, _ := CSVToMap(data, "questions.csv")
+	// fmt.Println("testData", testData["Nama ibukota indonesia?"])
+	fmt.Println("testData", testData)
 }
 
 func CSVToMap(data map[string]string, fileName string) (map[string]string, error) {
 	// TODO: answer here
+
 	dataFile, err := os.Open(fileName)
 
 	if err != nil {
@@ -25,14 +30,21 @@ func CSVToMap(data map[string]string, fileName string) (map[string]string, error
 
 	r := csv.NewReader(dataFile)
 
-	if _, err := r.Read(); err != nil {
-		return  *new(map[string]string) ,err
+	if _, err = r.Read(); err != nil {
+		return *&data, err
 	}
 
-	dt, err := r.ReadAll()
+	makeNote := make(map[string]string)
+
+	listData, err := r.ReadAll()
 	if err != nil {
-		return  *new(map[string]string) ,err
+		return *&data, err
 	}
 
-	return *new(map[string]string, nil
+	for _, v := range listData {
+		fmt.Println("kj", v[0], v[1])
+		makeNote[strings.TrimSpace(v[0])] = strings.TrimSpace(v[1])
+	}
+
+	return *&makeNote, nil
 }
