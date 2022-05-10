@@ -12,6 +12,15 @@ import (
 func vegetaGet(target string) *vegeta.Metrics {
 	metrics := &vegeta.Metrics{}
 	// TODO: answer here
+	duration := 2 * time.Second
+	frequency := 10
+	rate := vegeta.Rate{Freq: frequency, Per: time.Second}
+	targeter := vegeta.NewStaticTargeter(vegeta.Target{
+		Method: "GET",
+		URL:    target,
+	})
+
+	metrics = vegetaAttack(targeter, rate, duration)
 	return metrics
 }
 
@@ -21,6 +30,14 @@ func vegetaGet(target string) *vegeta.Metrics {
 func vegetaPost(target string) *vegeta.Metrics {
 	metrics := &vegeta.Metrics{}
 	// TODO: answer here
+	duration := 2 * time.Second
+	frequency := 15
+	rate := vegeta.Rate{Freq: frequency, Per: time.Second}
+	targeter := vegeta.NewStaticTargeter(vegeta.Target{
+		Method: "POST",
+		URL:    target,
+	})
+	metrics = vegetaAttack(targeter, rate, duration)
 	return metrics
 }
 
