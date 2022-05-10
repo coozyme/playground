@@ -11,13 +11,13 @@ import (
 //jalankan program ini
 
 func main() {
-	testGet()
+	// testGet()
 	testPost()
 }
 
 func testGet() {
 	duration := 1 * time.Second                            //durasi attack
-	frequency := 40                                        //jumlah request
+	frequency := 10                                        //jumlah request
 	target := "http://localhost:8090"                      //target
 	rate := vegeta.Rate{Freq: frequency, Per: time.Second} //mengatur rate request
 	targeter := vegeta.NewStaticTargeter(vegeta.Target{
@@ -31,7 +31,7 @@ func testGet() {
 
 func testPost() {
 	duration := 1 * time.Second
-	frequency := 40
+	frequency := 10
 	target := "http://localhost:8090"
 	body := "hello"
 	rate := vegeta.Rate{Freq: frequency, Per: time.Second}
