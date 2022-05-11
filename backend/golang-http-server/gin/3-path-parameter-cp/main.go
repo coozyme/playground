@@ -1,10 +1,6 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
-	"strconv"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -33,11 +29,18 @@ var data = map[int]User{
 }
 
 func ProfileHandler() func(c *gin.Context) {
-	return func(c *gin.Context) {} // TODO: replace this
+	// TODO: replace this
+	// id := c.
+
+	return func(c *gin.Context) {}
 }
 
 func GetRouter() *gin.Engine {
-	return &gin.Engine{} // TODO: replace this
+	// TODO: replace this
+	r := gin.Default()
+
+	r.GET("/profile/:id", ProfileHandler)
+	return &gin.Engine{}
 }
 
 func main() {

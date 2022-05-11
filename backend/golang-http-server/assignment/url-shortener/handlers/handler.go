@@ -1,10 +1,8 @@
 package handlers
 
 import (
-	"errors"
 	"net/http"
 
-	"github.com/ruang-guru/playground/backend/golang-http-server/assignment/url-shortener/entity"
 	"github.com/ruang-guru/playground/backend/golang-http-server/assignment/url-shortener/repository"
 
 	"github.com/gin-gonic/gin"
@@ -22,10 +20,12 @@ func NewURLHandler(repo *repository.URLRepository) URLHandler {
 
 func (h *URLHandler) Get(c *gin.Context) {
 	// TODO: answer here
+	c.Redirect(http.StatusFound, "/linkshorter")
 }
 
 func (h *URLHandler) Create(c *gin.Context) {
 	// TODO: answer here
+
 }
 
 func (h *URLHandler) CreateCustom(c *gin.Context) {

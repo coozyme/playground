@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	// TODO: answer here
+	"strconv"
 	"time"
 
 	vegeta "github.com/tsenart/vegeta/v12/lib"
@@ -24,6 +25,21 @@ type Movie struct {
 func addMovieTest(target string) *vegeta.Metrics {
 	metrics := &vegeta.Metrics{}
 	// TODO: answer here
+	duration := 1 * time.Second
+	frequency := 10
+
+	body, _ := json.Marshal(Movie{
+		Episode: 1,
+		Name:    "Movie 1",
+	})
+
+	targeter := vegeta.NewStaticTargeter(vegeta.Target{
+		Method: "POST",
+		URL:    target + "/movie",
+		Body:   body,
+	})
+
+	metrics = vegetaAttack(targeter, frequency, duration)
 	return metrics
 }
 
@@ -33,6 +49,24 @@ func addMovieTest(target string) *vegeta.Metrics {
 func getMovieTest(target string) *vegeta.Metrics {
 	metrics := &vegeta.Metrics{}
 	// TODO: answer here
+	duration := 1 * time.Second
+	frequency := 25
+
+	targets := []vegeta.Target{}
+
+	for i := 1; i <= 25; i++ {
+		id := strconv.Itoa(i)
+
+		targets = append(targets, vegeta.Target{
+			Method: "GET",
+			URL:    target + "/movie/" + id,
+			Body:   []byte(""),
+		})
+	}
+
+	targeter := vegeta.NewStaticTargeter(targets...)
+
+	metrics = vegetaAttack(targeter, frequency, duration)
 	return metrics
 }
 
@@ -40,6 +74,16 @@ func getMovieTest(target string) *vegeta.Metrics {
 func getMoviesTest(target string) *vegeta.Metrics {
 	metrics := &vegeta.Metrics{}
 	// TODO: answer here
+	duration := time.Second
+	frequency := 20
+
+	targeter := vegeta.NewStaticTargeter(vegeta.Target{
+		Method: "GET",
+		URL:    target + "/movies",
+	})
+
+	metrics = vegetaAttack(targeter, frequency, duration)
+
 	return metrics
 }
 

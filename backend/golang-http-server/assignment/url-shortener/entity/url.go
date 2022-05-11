@@ -9,6 +9,10 @@ import (
 // Buatlah entity URL dengan atribut LongURL dan ShortURL masing-masing string
 
 // TODO: answer here
+type URL struct {
+	longUrl  string
+	shortUrl string
+}
 
 func GetRandomShortURL(longURL string) string {
 	s := fmt.Sprintf("%s%d", longURL, time.Now().Unix())
