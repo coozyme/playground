@@ -44,7 +44,7 @@ func spikeTest(target string) *vegeta.Metrics {
 func vegetaAttackSpike(targeter vegeta.Targeter, rate vegeta.ConstantPacer, duration time.Duration, spikeValue int) *vegeta.Metrics {
 	var metrics vegeta.Metrics
 	// TODO: answer here
-	attacker := vegeta.Attacker{}
+	attacker := vegeta.NewAttacker()
 	normalFreq := rate.Freq
 
 	for i := 0; i < int(duration.Seconds()); i++ {
