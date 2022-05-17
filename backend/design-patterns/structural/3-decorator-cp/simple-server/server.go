@@ -27,9 +27,9 @@ func (s *Server) GetPerson(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(Person{
-		Name:  "Aguss",
-		Age:   35,
-		Email: "aguss@gmail.com",
+		Name:  "John Doe",
+		Age:   30,
+		Email: "john_doe@gmail.com",
 	})
 
 }
