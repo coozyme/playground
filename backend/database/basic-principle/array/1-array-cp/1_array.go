@@ -34,8 +34,20 @@ func (db *EmployeeDB) Insert(name string, position string, salary int, managerID
 
 func (db *EmployeeDB) Update(id int, name string, position string, salary int, managerID int) {
 	// TODO: answer here
+	(*db)[id-1].ID = id
+	(*db)[id-1].Name = name
+	(*db)[id-1].Position = position
+	(*db)[id-1].Salary = salary
+	(*db)[id-1].ManagerID = managerID
 }
 
 func (db *EmployeeDB) Delete(id int) {
 	// TODO: answer here
+
+	(*db)[id-1].ID = 0
+	(*db)[id-1].Name = ""
+	(*db)[id-1].Position = ""
+	(*db)[id-1].Salary = 0
+	(*db)[id-1].ManagerID = 0
+
 }
