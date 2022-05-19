@@ -1,6 +1,7 @@
 package main_test
 
 import (
+	"fmt"
 	"net/http/httptest"
 
 	. "github.com/onsi/ginkgo/v2"
@@ -79,7 +80,8 @@ var _ = Describe("Server", func() {
 			server.Routes().ServeHTTP(wr, req)
 
 			Expect(wr.Code).To(Equal(200))
-			Expect(wr.Body.String()).To(Equal(`{"message": "Hello, world!"}`))
+			fmt.Printf("wer %T", wr.Body.String())
+			Expect(wr.Body.String()).To(Equal(`{"message":"Hello, world!"}`))
 		})
 	})
 })
