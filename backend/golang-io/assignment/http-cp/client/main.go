@@ -1,8 +1,11 @@
 package main
 
 import (
+	// "encoding/json"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"log"
 	"net/http"
 )
 
@@ -20,9 +23,28 @@ type Pokemon struct {
 
 func GetPokemonData() (*Pokemon, error) {
 	apiPath := "https://pokeapi.co/api/v2/pokemon/1"
-	fmt.Println(apiPath)
+	// TODO: answer here
 
-	panic("Not yet implemented") // TODO: answer here
+	var resp Pokemon
+
+	response, err := http.Get(apiPath)
+
+	if err != nil {
+		log.Fatalf("failed get api, err : %v", err)
+		return &resp, err
+	}
+
+	responseData, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		log.Fatalf("failed ReadAll, err: %v", err)
+		return &resp, err
+	}
+
+	json.Unmarshal(responseData, &resp)
+
+	return &resp, nil
+
+	panic("Not yet implemented")
 }
 
 func main() {
