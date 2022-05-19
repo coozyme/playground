@@ -62,10 +62,28 @@ func (db *UserTable) InsertUser(name string, age int) {
 
 func (db *PhoneTable) WherePhone(id int) *PhoneRow {
 	// TODO: answer here
+	resultRow := &PhoneRow{}
+	for i := 0; i < len(*db); i++ {
+		if (*db)[i].ID == id {
+			resultRow.ID = (*db)[i].ID
+			resultRow.Number = (*db)[i].Number
+			resultRow.CountryCode = (*db)[i].CountryCode
+			resultRow.UserID = (*db)[i].UserID
+		}
+	}
+	return resultRow
 }
 
 func (db *UserTable) GetUser(userID int) UserRow {
 	var result UserRow
 	// TODO: answer here
+	// resultRow := &UserRow{}
+	for i := 0; i < len(*db); i++ {
+		if (*db)[i].ID == userID {
+			result.ID = (*db)[i].ID
+			result.Name = (*db)[i].Name
+			result.Age = (*db)[i].Age
+		}
+	}
 	return result
 }

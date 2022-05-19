@@ -62,8 +62,28 @@ func (db *SchoolTable) InsertSchool(name string, address string) {
 
 func (db *StudentTable) WhereStudent(id int) *StudentRow {
 	// TODO: answer here
+	row := &StudentRow{}
+	for i := 0; i < len(*db); i++ {
+		if (*db)[i].ID == id {
+			row.ID = (*db)[i].ID
+			row.Name = (*db)[i].Name
+			row.Age = (*db)[i].Age
+			row.SchoolID = (*db)[i].SchoolID
+		}
+	}
+	return row
 }
 
 func (db *SchoolTable) GetSchool(schoolID int) SchoolRow {
 	// TODO: answer here
+	resultRow := &SchoolRow{}
+	for i := 0; i < len(*db); i++ {
+		if (*db)[i].ID == schoolID {
+			resultRow.ID = (*db)[i].ID
+			resultRow.Name = (*db)[i].Name
+			resultRow.Address = (*db)[i].Address
+			fmt.Println("testt-if", resultRow)
+		}
+	}
+	return *resultRow
 }
