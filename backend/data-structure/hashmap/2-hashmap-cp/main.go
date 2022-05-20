@@ -27,5 +27,24 @@ func main() {
 }
 
 func AnagramsChecker(str1 string, str2 string) string {
-	return "" // TODO: replace this
+	// TODO: replace this
+	strMap := make(map[string]string)
+	var result string
+
+	if len(str1) != len(str2) {
+		result = "Bukan Anagram"
+	}
+	for i := 0; i < len(str1); i++ {
+		strMap[str1[:1]] = str1[:1]
+	}
+
+	for i := 0; i < len(str2); i++ {
+		if str2[:1] == strMap[str2[:1]] {
+			result = "Anagram"
+		} else {
+			result = "Bukan Anagram"
+		}
+	}
+
+	return result
 }
